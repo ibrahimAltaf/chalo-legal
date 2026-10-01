@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Delete Account · CHALO</title>
+  <meta name="description" content="Request permanent deletion of your CHALO account and associated data (Google Play requirement)." />
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #09090f; color: #a1a1aa; line-height: 1.7; }
+    a { color: #8b5cf6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header { position: sticky; top: 0; backdrop-filter: blur(10px); background: rgba(12,12,22,.9); border-bottom: 1px solid rgba(255,255,255,.07); }
+    .nav { max-width: 720px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .brand { letter-spacing: .18em; font-weight: 700; color: #8b5cf6; }
+    .nav a { margin-left: 14px; font-size: 14px; color: #a1a1aa; }
+    main { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; }
+    .eyebrow { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #f5c542; }
+    h1 { color: #f4f4f5; font-size: clamp(28px, 5vw, 40px); margin: 8px 0 6px; letter-spacing: -.02em; }
+    .updated { font-size: 14px; margin-bottom: 28px; }
+    h2 { color: #f4f4f5; font-size: 20px; margin: 28px 0 10px; }
+    ul { padding-left: 20px; }
+    li { margin: 8px 0; }
+    strong { color: #f4f4f5; }
+    .card { background: #12121c; border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 20px; margin-top: 20px; }
+    label { display: block; font-size: 13px; color: #f4f4f5; margin: 14px 0 6px; }
+    input, textarea { width: 100%; background: #0c0c14; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; color: #f4f4f5; padding: 12px 14px; font: inherit; }
+    textarea { min-height: 90px; resize: vertical; }
+    .row { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; }
+    .row input { width: auto; margin-top: 4px; }
+    button { margin-top: 18px; width: 100%; border: 0; border-radius: 14px; padding: 14px 16px; font-weight: 700; font-size: 15px; color: white; background: linear-gradient(135deg, #ff2d8a, #8b1fe8); cursor: pointer; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .msg { margin-top: 14px; padding: 12px 14px; border-radius: 12px; display: none; }
+    .msg.ok { display: block; background: rgba(61,220,151,.12); color: #3ddc97; border: 1px solid rgba(61,220,151,.3); }
+    .msg.err { display: block; background: rgba(255,107,122,.12); color: #ff6b7a; border: 1px solid rgba(255,107,122,.3); }
+    footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.07); font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="../">CHALO</a>
+      <div>
+        <a href="../privacy/">Privacy</a>
+        <a href="../terms/">Terms</a>
+        <a href="../delete-account/">Delete</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <p class="eyebrow">Account</p>
+    <h1>Delete your CHALO account</h1>
+    <p class="updated">Google Play account-deletion resource · Last updated: October 1, 2026</p>
+
+    <p>You can permanently delete your CHALO account and associated personal data. This cannot be undone.</p>
+
+    <h2>Option 1 — In the app (fastest)</h2>
+    <ol>
+      <li>Open <strong>CHALO</strong></li>
+      <li>Go to <strong>Me → Settings → Delete account</strong></li>
+      <li>Confirm deletion</li>
+    </ol>
+    <p>Your profile is disabled immediately. Residual backups may be purged within <strong>30 days</strong>.</p>
+
+    <h2>Option 2 — Web request</h2>
+    <p>If you cannot open the app, submit the form below. We process verified requests within <strong>30 days</strong>.</p>
+
+    <div class="card">
+      <form id="deleteForm">
+        <label for="email">Account email</label>
+        <input id="email" name="email" type="email" placeholder="you@email.com" autocomplete="email" />
+
+        <label for="numericUid">CHALO ID (optional)</label>
+        <input id="numericUid" name="numericUid" inputmode="numeric" placeholder="e.g. 90524616" />
+
+        <label for="reason">Reason (optional)</label>
+        <textarea id="reason" name="reason" placeholder="Optional note for support"></textarea>
+
+        <div class="row">
+          <input id="confirm" name="confirm" type="checkbox" required />
+          <label for="confirm" style="margin:0">I understand this permanently deletes my account, profile, wallet balance, and VIP status.</label>
+        </div>
+
+        <button type="submit" id="submitBtn">Request account deletion</button>
+        <div id="msg" class="msg" role="status"></div>
+      </form>
+      <p style="margin-top:16px;font-size:13px">
+        Or email
+        <a href="mailto:privacy@chalo.app?subject=Account%20deletion%20request">privacy@chalo.app</a>
+        with your email / CHALO ID.
+      </p>
+    </div>
+
+    <h2>What we delete</h2>
+    <ul>
+      <li>Profile (nickname, avatar, bio) and discovery presence</li>
+      <li>Login session / device binding for that account</li>
+      <li>Follows, moments, and in-app social links where tied to the account</li>
+      <li>Wallet balance and VIP status (forfeited; not recoverable)</li>
+    </ul>
+
+    <h2>What we may keep briefly</h2>
+    <ul>
+      <li>Security / fraud logs and transaction records required by law (limited retention)</li>
+      <li>Content you sent to other users may remain visible to them (e.g. chat copies)</li>
+    </ul>
+
+    <h2>API (developers / automation)</h2>
+    <p>
+      Authenticated in-app deletion: <code style="color:#f4f4f5">DELETE /v1/auth/account</code><br />
+      Public web request: <code style="color:#f4f4f5">POST /v1/auth/delete-request</code>
+      with JSON <code style="color:#f4f4f5">{ email, numericUid?, reason?, confirm: true }</code>
+    </p>
+
+    <footer>
+      Related:
+      <a href="../privacy/">Privacy Policy</a> ·
+      <a href="../terms/">Terms</a>
+    </footer>
+  </main>
+  <script>
+    (function () {
+      var form = document.getElementById('deleteForm');
+      var msg = document.getElementById('msg');
+      var btn = document.getElementById('submitBtn');
+      var API = (window.CHALO_API_URL || 'https://api.chalo.app/v1').replace(/\/$/, '');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        msg.className = 'msg';
+        msg.textContent = '';
+        var email = document.getElementById('email').value.trim();
+        var numericUid = document.getElementById('numericUid').value.trim();
+        var reason = document.getElementById('reason').value.trim();
+        var confirm = document.getElementById('confirm').checked;
+        if (!email && !numericUid) {
+          msg.className = 'msg err';
+          msg.textContent = 'Enter account email or CHALO ID.';
+          return;
+        }
+        if (!confirm) {
+          msg.className = 'msg err';
+          msg.textContent = 'Please confirm deletion.';
+          return;
+        }
+        btn.disabled = true;
+        try {
+          var res = await fetch(API + '/auth/delete-request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ email: email || undefined, numericUid: numericUid || undefined, reason: reason || undefined, confirm: true })
+          });
+          var json = await res.json().catch(function () { return {}; });
+          if (!res.ok || json.success === false) {
+            throw new Error((json.error && json.error.message) || ('Request failed (' + res.status + ')'));
+          }
+          var data = json.data || json;
+          msg.className = 'msg ok';
+          msg.textContent = data.message || 'Deletion request submitted.';
+          form.reset();
+        } catch (err) {
+          // Fallback when API is unreachable — still a valid Play Store request path via email.
+          var subject = encodeURIComponent('Account deletion request');
+          var body = encodeURIComponent(
+            'Please delete my CHALO account.\n\nEmail: ' + (email || '-') +
+            '\nCHALO ID: ' + (numericUid || '-') +
+            '\nReason: ' + (reason || '-') +
+            '\n\nI confirm permanent deletion.'
+          );
+          msg.className = 'msg err';
+          msg.innerHTML = 'Could not reach the API. <a href="mailto:privacy@chalo.app?subject=' + subject + '&body=' + body + '">Email privacy@chalo.app instead</a>.';
+          window.location.href = 'mailto:privacy@chalo.app?subject=' + subject + '&body=' + body;
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
